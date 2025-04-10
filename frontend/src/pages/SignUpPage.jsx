@@ -2,7 +2,25 @@ import React from "react";
 import axios from "axios";
 
 
+function SignUpPage() {
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
+  const MONGO_URI = import.meta.env.VITE_MONGO_URI
+
+  const handleSignUp = async () => {
+    try {
+      const response = await axios.post(`${MONGO_URI}/signup`, {
+        Name: name,
+        Email: email,
+        Password: password
+      });
+      console.log(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="w-full max-w-md bg-gray-800 rounded-lg p-6 shadow-lg">
