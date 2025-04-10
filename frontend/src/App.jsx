@@ -11,19 +11,21 @@ function App() {
   return (
     <div className="">
       <Aurora
-        colorStops={["#BFECFF", "#CDC1FF", "#FFF6E3", "#FFCCEA"]        }
+        colorStops={["#BFECFF", "#CDC1FF", "#FFF6E3", "#FFCCEA"]}
         blend={0}
         amplitude={1.0}
         speed={0.5}
-        className = 'absolute -z-10 -top-6'
+        className="absolute -z-10 -top-6"
       />
       <NavBar />
       <Routes>
+        <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forget" element={<ForgetPage />} />
+        <Route path="/dashboard" element={<DashBoardPage />} />
       </Routes>
-      <HomePage/>
+      <HomePage />
     </div>
   );
 }
