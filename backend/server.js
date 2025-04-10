@@ -2,6 +2,7 @@ import connectDB from "./configs/db.js";
 import express from "express";
 import dotenv from "dotenv";
 import authRoutes from "../backend/routers/authRoutes.js";
+import studentRoutes from "./routers/student.router.js";
 import cors from "cors";
 
 
@@ -16,6 +17,7 @@ app.use(cors({
 }));
 console.log(process.env.VITE_MONGO_URI)
 app.use("/api/auth",authRoutes);
+app.use("/api/students",studentRoutes);
 
 app.listen(process.env.PORT || 5000, () => {
     connectDB();
