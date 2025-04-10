@@ -2,7 +2,7 @@ import React from "react";
 
 function LoginPage() {
   return (
-    <section class="bg-gray-50 dark: bg-gray-1000 justify-center items-center">
+    <section class="bg-gray-50 dark: bg-gray-1000 items-center h-screen flex items-center justify-center overflow-hidden">
       <div class="flex flex-col items-center justify-center px-5 py-7 mx-auto md:h-screen ">
         <a
           href="#"
@@ -74,26 +74,18 @@ function LoginPage() {
                 </div>
                 <a
                   href="/forget"
-                  class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  class="text-sm font-medium text-primary-600 hover:underline dark:text-white"
                 >
                   Forgot password?
                 </a>
               </div>
               <button
                 type="submit"
-                class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg mb-6 transition duration-200"
               >
                 Sign in
               </button>
-              <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                Don’t have an account yet?
-                <a
-                  href="/signup"
-                  class="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
-                  Sign up
-                </a>
-              </p>
+    
             </form>
           </div>
         </div>
