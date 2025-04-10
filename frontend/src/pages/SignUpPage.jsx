@@ -1,22 +1,24 @@
 import React from "react";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 
 function SignUpPage() {
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const MONGO_URI = import.meta.env.VITE_MONGO_URI
+  const navigate = useNavigate();
+  const MONGO_URI = import.meta.env.VITE_MONGO_URI;
 
   const handleSignUp = async () => {
     try {
       const response = await axios.post(`${MONGO_URI}/signup`, {
         Name: name,
         Email: email,
-        Password: password
+        Password: password,
       });
-      console.log(response.data);
+      alert(response.data.message);
+      navigate("/login");
     } catch (err) {
       console.error(err);
     }
