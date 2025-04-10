@@ -23,9 +23,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forget" element={<ForgetPage />} />
-        <Route path="/dashboard" element={<DashBoardPage />} />
       </Routes>
-      <HomePage />
     </div>
   );
 }
