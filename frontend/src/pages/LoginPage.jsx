@@ -1,6 +1,28 @@
 import React from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const MONGO_URI = import.meta.env.VITE_MONGO_URI;
+
+  const navigate = useNavigate();
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post(`${MONGO_URI}/login`, {
+        Email: email,
+        Password: password,
+      });
+      if (response.status === 200) {
+        navigate("/home");
+      }
+      alert(response.data.message);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <section class="dark: bg-gray-1000 h-screen flex items-center justify-center overflow-hidden">
       <div class="flex flex-col items-center justify-center px-5 py-7 mx-auto md:h-screen ">
@@ -31,9 +53,11 @@ function LoginPage() {
                   type="email"
                   name="email"
                   id="email"
+                  value={email}
                   class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
-                  required=""
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               <div>
@@ -48,8 +72,10 @@ function LoginPage() {
                   name="password"
                   id="password"
                   placeholder="••••••••"
+                  value={password}
                   class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required=""
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               <div class="flex items-center justify-between">
@@ -82,10 +108,10 @@ function LoginPage() {
               <button
                 type="submit"
                 class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg mb-6 transition duration-200"
+                onClick={handleLogin}
               >
                 Sign in
               </button>
-    
             </form>
           </div>
         </div>
