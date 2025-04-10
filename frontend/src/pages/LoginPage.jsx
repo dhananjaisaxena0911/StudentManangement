@@ -2,8 +2,8 @@ import React from "react";
 
 function LoginPage() {
   return (
-    <section class="bg-gray-50 dark: bg-gray-1000">
-      <div class="flex flex-col items-center justify-center px 5 py-7 mx-auto md:h-screen">
+    <section class="bg-gray-50 dark: bg-gray-1000 justify-center items-center">
+      <div class="flex flex-col items-center justify-center px-5 py-7 mx-auto md:h-screen ">
         <a
           href="#"
           class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
