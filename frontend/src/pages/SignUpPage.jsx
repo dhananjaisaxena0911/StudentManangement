@@ -1,8 +1,10 @@
 import React from "react";
+import axios from "axios";
 
-function SignUpPage() {
+
+
   return (
-    <div className="min-h-screen bg-gray-50 flex justify-center items-center">
+    <div className="min-h-screen flex justify-center items-center">
       <div className="w-full max-w-md bg-gray-800 rounded-lg p-6 shadow-lg">
         <h1 className="font-bold text-3xl text-white text-center mb-6">
           Sign Up
@@ -18,6 +20,8 @@ function SignUpPage() {
         <input
           type="text"
           placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           className="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-4"
         />
 
@@ -31,6 +35,8 @@ function SignUpPage() {
         <input
           type="email"
           placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           className="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-4"
         />
 
@@ -44,11 +50,16 @@ function SignUpPage() {
         <input
           type="password"
           placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           className="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-6"
         />
 
         {/* Sign Up Button */}
-        <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg mb-6 transition duration-200">
+        <button
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg mb-6 transition duration-200"
+          onClick={handleSignUp}
+        >
           Sign Up
         </button>
 
