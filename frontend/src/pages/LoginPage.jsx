@@ -16,6 +16,7 @@ function LoginPage() {
         Password: password,
       });
       if (response.status === 200) {
+        localStorage.setItem("isverified", true);
         navigate("/home");
       }
       alert(response.data.message);
