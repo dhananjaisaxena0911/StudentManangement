@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import CreateStudent from '../components/studentOperations/CreateStudent';
+import ViewStudent from '../components/studentOperations/ViewStudent';
+import DeleteStudent from '../components/studentOperations/DeleteStudent';
+import UpdateStudent from '../components/studentOperations/UpdateStudent';
 
 function DashBoardPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -35,6 +38,9 @@ function DashBoardPage() {
     </div>
   
 <CreateStudent/>
+<ViewStudent/>
+<DeleteStudent/>
+<UpdateStudent/>
   </div>
   );
 }
