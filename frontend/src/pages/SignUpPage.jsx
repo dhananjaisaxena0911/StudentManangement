@@ -42,6 +42,7 @@ function SignUpPage() {
         </h1>
 
         {/* Name Input */}
+        <form>
         <label
           htmlFor="name"
           className="block text-sm font-medium text-gray-300 mb-2"
@@ -53,7 +54,8 @@ function SignUpPage() {
           name="name"
           placeholder="Name"
           value={formData.name}
-          onChange={handleChange}
+          onChange={handleChange} 
+          required
           className="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3 mb-4"
         />
 
@@ -69,7 +71,8 @@ function SignUpPage() {
           name="email"
           placeholder="Email"
           value={formData.email}
-          onChange={handleChange}
+          onChange={handleChange} 
+          required
           className="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3 mb-4"
         />
 
@@ -86,6 +89,7 @@ function SignUpPage() {
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
+          required
           className="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3 mb-6"
         />
 
@@ -104,6 +108,7 @@ function SignUpPage() {
             Login
           </a>
         </div>
+        </form>
       </div>
     </div>
   );
