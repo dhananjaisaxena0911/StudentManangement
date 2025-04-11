@@ -15,11 +15,11 @@ app.use(cors({
     origin: process.env.VITE_MONGO_URI,
     credentials: true
 }));
-console.log(process.env.VITE_MONGO_URI)
+
 app.use("/api/auth",authRoutes);
 app.use("/api/students",studentRoutes);
 
-app.listen(process.env.PORT || 5000, () => {
+app.listen(process.env.PORT, () => {
     connectDB();
-    console.log(`Server is running on port ${process.env.PORT || 5000}`);
+    console.log(`Server is running on port ${process.env.PORT}`);
 });

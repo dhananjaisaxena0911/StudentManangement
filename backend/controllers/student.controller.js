@@ -2,111 +2,111 @@ import studentModel from "../models/studentmodel.js";
 
 //Create New Student
 
- const createStudent =async(req,res)=>{
-    try{
-        const{
-            Name,
-            Class,
-            Age,
-            Course
-        }=req.body;
+export const createStudent = async (req, res) => {
+  try {
+    const { Name, Class, Age, Course } = req.body;
 
-        if(!Name||!Class||!Age||!Course){
-            return res.status(400).json({
-                message:"All fields are required!"
-            });
-        }
-        const newStudent= new studentModel({
-            Name,
-            Class,
-            Age,
-            Course
-        });
-        await newStudent.save();
-
-        res.status(201).json({
-          message: "Student added successfully",
-          student: newStudent,
-        });
-    }catch(err){
-        console.log(err);
-        res.status(201).json({
-            message:"Server Error"
-        })
+    if (!Name || !Class || !Age || !Course) {
+      return res.status(400).json({
+        message: "All fields are required!",
+      });
     }
-}
+    const lastStudent = await studentModel.findOne().sort({ RollNo: -1 });
+    const newRollNo = lastStudent ? lastStudent.RollNo + 1 : 1;
+    const newStudent = new studentModel({
+      RollNo: newRollNo,
+      Name,
+      Class,
+      Age,
+      Course,
+    });
+    await newStudent.save();
+
+    res.status(201).json({
+      message: "Student added successfully",
+      student: newStudent,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(201).json({
+      message: "Server Error",
+    });
+  }
+};
 
 //get All Students
- const getStudents= async(req,res)=>{
-    try{
-        const student= await studentModel.find();
-        res.status(200).json(student);
-    }catch(err){
-        console.log(err);
+export const getStudents = async (req, res) => {
+  try {
+    const student = await studentModel.find();
+    res.status(200).json(student);
+  } catch (err) {
+    console.log(err);
     res.status(500).json({ message: "Server Error" });
+  }
+};
+
+// Find student by RollNo
+export const getStudentByRollNo = async (req, res) => {
+  try {
+    const { rollNo } = req.params; // Get rollNo from request parameters
+    const student = await studentModel.findOne({ RollNo: rollNo }); // Find student by RollNo
+
+    if (!student) {
+      return res.status(404).json({
+        message: "Student not found!",
+      });
     }
-}
 
-//find student by ID
-
-const getStudentByID=async(req,res)=>{
-    try{
-        const student=await studentModel.findById(req.params.id);
-        if(!student){
-            res.status(404).json({
-                message:"Student not found!"
-            })
-        }
-        res.status(200).json({
-            student
-        });
-    }catch(err){
-        console.log(err);
+    res.status(200).json({
+      student,
+    });
+  } catch (err) {
+    console.log(err);
     res.status(500).json({ message: "Server Error" });
-    }
-}
+  }
+};
 
-//update Student details
-const updateStudent = async(req,res)=>{
-    try{
-        const student=await studentModel.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            {new:true}
-        );
-        if(!student){
-            return res.status(404).json({
-                message:"Student Not Found!"
-            });
-        }
-        res.status(200).json({
-            message:"Student Updated Successfully",
-            student,
-        });
-    }catch(err)
-    {
-        console.log(err);
-        res.status(400).json({
-            message:"Server Error"
-        });
-    }
-}
+// Update Student by RollNo
+export const updateStudentByRollNo = async (req, res) => {
+  try {
+    const { rollNo } = req.params; // Get rollNo from request parameters
+    const updatedStudent = await studentModel.findOneAndUpdate(
+      { RollNo: rollNo },
+      req.body,
+      { new: true } // Return the updated document
+    );
 
-//delete student by id
-const deleteStudent= async(req,res)=>{
-    try{
-      const student=await studentModel.findByIdAndDelete(req.params.id);
-      if(!student){
-        res.status(404).json({
-            message:"Student not found!"
-        })
-      }
-      res.status(200).json({message:"Student Deleted Successfully"})  
-    }catch(err){
-        console.log(err);
+    if (!updatedStudent) {
+      return res.status(404).json({
+        message: "Student not found!",
+      });
+    }
+
+    res.status(200).json({
+      message: "Student Updated Successfully",
+      student: updatedStudent,
+    });
+  } catch (err) {
+    console.log(err);
     res.status(500).json({ message: "Server Error" });
-  
-    }
-}
+  }
+};
 
-export {deleteStudent,updateStudent,createStudent,getStudentByID,getStudents};
+// Delete Student by RollNo
+export const deleteStudentByRollNo = async (req, res) => {
+  try {
+    const { rollNo } = req.params; // Get rollNo from request parameters
+    const deletedStudent = await studentModel.findOneAndDelete({ RollNo: rollNo });
+
+    if (!deletedStudent) {
+      return res.status(404).json({
+        message: "Student not found!",
+      });
+    }
+
+    res.status(200).json({ message: "Student Deleted Successfully" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
