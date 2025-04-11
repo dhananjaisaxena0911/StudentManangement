@@ -7,9 +7,11 @@ import HomePage from "./pages/HomePage";
 import { Route, Routes } from "react-router-dom";
 import Aurora from "./components/Bits/Aurora";
 import DashBoardPage from "./pages/DashBordPage";
+import Privateroute from "./components/Privateroute";
 import Footer from "./components/Footer";
 
 function App() {
+  const isAuthenticated = !!localStorage.getItem('token');
   return (
     <div className="">
       <Aurora
@@ -25,7 +27,9 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forget" element={<ForgetPage />} />
-        <Route path="/dashboard" element={<DashBoardPage />} />
+        <Route element={<Privateroute />}>
+          <Route path="/dashboard" element={<DashBoardPage />} />
+        </Route>
       </Routes>
       <Footer/>
     </div>

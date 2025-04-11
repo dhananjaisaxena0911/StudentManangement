@@ -16,6 +16,7 @@ app.use(cors({
     credentials: true
 }));
 
+app.use(ErrorMiddleware)
 app.use("/api/auth",authRoutes);
 app.use("/api/students",studentRoutes);
 
@@ -23,3 +24,4 @@ app.listen(process.env.PORT, () => {
     connectDB();
     console.log(`Server is running on port ${process.env.PORT}`);
 });
+
