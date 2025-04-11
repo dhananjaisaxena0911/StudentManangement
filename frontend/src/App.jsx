@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage";
 import { Route, Routes } from "react-router-dom";
 import Aurora from "./components/Bits/Aurora";
 import DashBoardPage from "./pages/DashBordPage";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/forget" element={<ForgetPage />} />
         <Route path="/dashboard" element={<DashBoardPage />} />
       </Routes>
+      <Footer/>
     </div>
   );
 }
