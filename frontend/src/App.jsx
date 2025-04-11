@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import Aurora from "./components/Bits/Aurora";
 import DashBoardPage from "./pages/DashBordPage";
 import Privateroute from "./components/Privateroute";
+import Footer from "./components/Footer";
 
 function App() {
   const isAuthenticated = !!localStorage.getItem('token');
@@ -30,6 +31,7 @@ function App() {
           <Route path="/dashboard" element={<DashBoardPage />} />
         </Route>
       </Routes>
+      <Footer/>
     </div>
   );
 }

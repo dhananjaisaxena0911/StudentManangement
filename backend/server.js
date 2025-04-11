@@ -4,7 +4,6 @@ import dotenv from "dotenv";
 import authRoutes from "../backend/routers/authRoutes.js";
 import studentRoutes from "./routers/student.router.js";
 import cors from "cors";
-import ErrorMiddleware from './middleware/error.js'
 
 
 dotenv.config();
@@ -16,14 +15,13 @@ app.use(cors({
     origin: process.env.VITE_MONGO_URI,
     credentials: true
 }));
+
 app.use(ErrorMiddleware)
-
-
-console.log(process.env.VITE_MONGO_URI)
 app.use("/api/auth",authRoutes);
 app.use("/api/students",studentRoutes);
 
-app.listen(process.env.PORT || 5000, () => {
+app.listen(process.env.PORT, () => {
     connectDB();
-    console.log(`Server is running on port ${process.env.PORT || 5000}`);
+    console.log(`Server is running on port ${process.env.PORT}`);
 });
+

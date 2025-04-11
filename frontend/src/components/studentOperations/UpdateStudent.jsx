@@ -1,48 +1,65 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
 
-function CreateStudent() {
+export default function UpdateStudent() {
   const [studentData, setStudentData] = useState({
-    name: "",
-    age: "",
-    class: "",
-    course: "",
+    rollNo: '',
+    name: '',
+    age: '',
+    class: '',
+    course: '',
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setStudentData({ ...studentData, [name]: value });
   };
+
   const MONGO_URI = import.meta.env.VITE_MONGO_STU_URI;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${MONGO_URI}/create`, {
+      const response = await axios.put(`${MONGO_URI}/rollno/${studentData.rollNo}`, {
         Name: studentData.name,
         Age: studentData.age,
         Class: studentData.class,
         Course: studentData.course,
       });
       alert(response.data.message);
-
-      setStudentData({ name: "", age: "", class: "", course: "" });
+      // Reset the form fields after successful submission
+      setStudentData({ rollNo: '', name: '', age: '', class: '', course: '' });
     } catch (error) {
-      console.error("Error creating student:", error);
-      alert("Error creating student. Please try again.");
+      console.error("Error updating student:", error);
+      alert("Error updating student. Please try again.");
     }
   };
 
   return (
     <div>
-      {/* Create Student Form */}
-      <div className="flex justify-center align-middle h-[90vh] items-center">
-        <div className="flex flex-col items-center mt-8">
-          <h2 className="text-2xl font-bold mb-4">CREATE STUDENT</h2>
-          <form className="space-y-4 w-96" onSubmit={handleSubmit}>
+      <div className='flex justify-center align-middle h-[90vh] items-center'>
+        <div className="flex flex-col items-center mt-8 ">
+          <h2 className="text-2xl font-bold mb-4">UPDATE STUDENT</h2>
+          <form className="space-y-6 w-96" onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="rollNo" className="block text-sm font-medium text-black">
+                Roll number<sup className="text-red-500 text-l">*</sup>
+              </label>
+              <input
+                type="number"
+                id="rollNo"
+                name="rollNo"
+                required
+                value={studentData.rollNo}
+                onChange={handleChange}
+                className="mt-1 p-2 w-full border border-gray-300 rounded-lg"
+                placeholder="Enter your roll number"
+              />
+            </div>
+
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-black">
-                Name<sup className="text-red-500 text-l">*</sup>
+                Name
               </label>
               <input
                 type="text"
@@ -55,10 +72,10 @@ function CreateStudent() {
                 placeholder="Enter your name"
               />
             </div>
-
+  
             <div>
               <label htmlFor="age" className="block text-sm font-medium text-black">
-                Age<sup className="text-red-500 text-l">*</sup>
+                Age
               </label>
               <input
                 type="number"
@@ -71,10 +88,10 @@ function CreateStudent() {
                 placeholder="Enter your age"
               />
             </div>
-
+  
             <div>
               <label htmlFor="class" className="block text-sm font-medium text-black">
-                Class<sup className="text-red-500 text-l">*</sup>
+                Class
               </label>
               <input
                 type="number"
@@ -87,10 +104,10 @@ function CreateStudent() {
                 placeholder="Enter your class"
               />
             </div>
-
+  
             <div>
               <label htmlFor="course" className="block text-sm font-medium text-black">
-                Course<sup className="text-red-500 text-l">*</sup>
+                Course
               </label>
               <input
                 type="text"
@@ -103,7 +120,7 @@ function CreateStudent() {
                 placeholder="Enter your course"
               />
             </div>
-
+  
             <div>
               <button
                 type="submit"
@@ -118,5 +135,3 @@ function CreateStudent() {
     </div>
   );
 }
-
-export default CreateStudent;

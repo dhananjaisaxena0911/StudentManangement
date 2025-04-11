@@ -3,19 +3,29 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function SignUpPage() {
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [formData, setFormData] = React.useState({
+    name: "",
+    email: "",
+    password: ""
+  });
 
   const navigate = useNavigate();
   const MONGO_URI = import.meta.env.VITE_MONGO_URI;
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
+  };
+
   const handleSignUp = async () => {
     try {
       const response = await axios.post(`${MONGO_URI}/signup`, {
-        Name: name,
-        Email: email,
-        Password: password,
+        Name: formData.name,
+        Email: formData.email,
+        Password: formData.password,
       });
       alert(response.data.message);
       navigate("/login");
@@ -23,6 +33,7 @@ function SignUpPage() {
       console.error(err);
     }
   };
+
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="w-full max-w-md bg-gray-800 rounded-lg p-6 shadow-lg">
@@ -31,18 +42,21 @@ function SignUpPage() {
         </h1>
 
         {/* Name Input */}
+        <form>
         <label
-          htmlFor="Name"
+          htmlFor="name"
           className="block text-sm font-medium text-gray-300 mb-2"
         >
           Your Name
         </label>
         <input
           type="text"
+          name="name"
           placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-4"
+          value={formData.name}
+          onChange={handleChange} 
+          required
+          className="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3 mb-4"
         />
 
         {/* Email Input */}
@@ -54,25 +68,29 @@ function SignUpPage() {
         </label>
         <input
           type="email"
+          name="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-4"
+          value={formData.email}
+          onChange={handleChange} 
+          required
+          className="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3 mb-4"
         />
 
         {/* Password Input */}
         <label
-          htmlFor="Password"
+          htmlFor="password"
           className="block text-sm font-medium text-gray-300 mb-2"
         >
           Your Password
         </label>
         <input
           type="password"
+          name="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-6"
+          value={formData.password}
+          onChange={handleChange}
+          required
+          className="bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3 mb-6"
         />
 
         {/* Sign Up Button */}
@@ -90,6 +108,7 @@ function SignUpPage() {
             Login
           </a>
         </div>
+        </form>
       </div>
     </div>
   );
