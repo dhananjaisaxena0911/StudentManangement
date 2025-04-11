@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import StudentCard from "../studentcard/StudentCard";
 
 export default function ViewStudent() {
-  const [rollNo, setRollNo] = useState("");
   const [studentData, setStudentData] = useState([]);
   const [searchRollNo, setSearchRollNo] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -11,15 +9,33 @@ export default function ViewStudent() {
 
   const MONGO_URI = import.meta.env.VITE_MONGO_STU_URI;
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await axios.get(`${MONGO_URI}/rollno/${rollNo}`); // Fetch student by roll number
+      setStudentData(response.data.student); // Assuming the response contains a student object
+      console.log(response.data.student);
+    } catch (err) {
+      setError("Student not found or server error.");
+      setStudentData(null); // Reset student data on error
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleViewAll = async () => {
     setLoading(true);
     setError("");
     try {
-      const response = await axios.get(`${MONGO_URI}`);
-      setStudentData(response.data);
-      console.log(response.data)
+      const response = await axios.get(`${MONGO_URI}`); // Fetch all students
+      setStudentData(response.data); // Assuming the response contains an array of students
+      console.log(response.data);
     } catch (err) {
-      setError("Student not found or server error.");
+      setError("Error fetching students.");
+      setStudentData(null); // Reset student data on error
     } finally {
       setLoading(false);
     }
