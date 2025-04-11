@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import authRoutes from "../backend/routers/authRoutes.js";
 import studentRoutes from "./routers/student.router.js";
 import cors from "cors";
+import ErrorMiddleware from './middleware/error.js'
 
 
 dotenv.config();
@@ -15,6 +16,7 @@ app.use(cors({
     origin: process.env.VITE_MONGO_URI,
     credentials: true
 }));
+app.use(ErrorMiddleware)
 
 app.use("/api/auth",authRoutes);
 app.use("/api/students",studentRoutes);
