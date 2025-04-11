@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import StudentCard from "../studentcard/StudentCard";
 
 export default function ViewStudent() {
   const [rollNo, setRollNo] = useState("");
-  const [studentData, setStudentData] = useState(null);
+  const [studentData, setStudentData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -12,10 +13,9 @@ export default function ViewStudent() {
   const handleSubmit = async () => {
     setLoading(true);
     setError("");
-
     try {
       const response = await axios.get(`${MONGO_URI}`);
-      setStudentData(response.data.student);
+      setStudentData(response.data);
       console.log(response.data)
     } catch (err) {
       setError("Student not found or server error.");
@@ -70,26 +70,14 @@ export default function ViewStudent() {
 
         {loading && <p>Loading...</p>}
         {error && <p className="text-red-500">{error}</p>}
-        {studentData && (
-          <div className="mt-4">
-            <h3 className="text-lg font-bold">Student Details:</h3>
-            <p>
-              <strong>Roll No:</strong> {studentData.RollNo}
-            </p>
-            <p>
-              <strong>Name:</strong> {studentData.Name}
-            </p>
-            <p>
-              <strong>Class:</strong> {studentData.Class}
-            </p>
-            <p>
-              <strong>Age:</strong> {studentData.Age}
-            </p>
-            <p>
-              <strong>Course:</strong> {studentData.Course}
-            </p>
+        {studentData.length > 0 && (
+          <div className="mt-6 flex flex-wrap gap-6 justify-center">
+            {studentData.map((student, index) => (
+              <StudentCard key={index} student={student} />
+            ))}
           </div>
         )}
+
       </div>
     </div>
   );

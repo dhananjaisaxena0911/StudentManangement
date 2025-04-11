@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const StudentCard = ({ student }) => {
   const { Name: name, RollNo: rollNo, Age: age, Class: studentClass, Course: course } = student;
@@ -19,28 +19,4 @@ const StudentCard = ({ student }) => {
   );
 };
 
-
-const ViewPage = () => {
-  const [student, setStudent] = useState(null);
-
-  useEffect(() => {
-   const rollNo = 1;
-
-    fetch(`http://localhost:5000/api/students/${rollNo}`)
-      .then(response => response.json())
-      .then(data => setStudent(data))  
-      .catch(error => console.error('Error fetching student:', error));
-  }, []);
-
-  return (
-    <div className="flex justify-center items-center flex-wrap gap-8 p-8">
-      {student ? (
-        <StudentCard student={student} /> 
-      ) : (
-        <p className="text-gray-600">Loading student data...</p>
-      )}
-    </div>
-  );
-};
-
-export default ViewPage;
+export default StudentCard;
