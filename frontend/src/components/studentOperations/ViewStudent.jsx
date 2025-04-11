@@ -28,6 +28,19 @@ export default function ViewStudent() {
           >
             Submit
           </button>
+
+        </div>
+        <div>
+          <button
+          type='button'
+          className='bg-green-500 text-white font-bold py-2 px-4 rounded-lg w-full hover:bg-green-700'
+          onClick={()=>{
+            //Add View All Logic
+            //adding temporary alert box
+            alert("View All Students Clicked!!");
+          }}>
+            View All
+          </button>
         </div>
         </form>
     </div>
