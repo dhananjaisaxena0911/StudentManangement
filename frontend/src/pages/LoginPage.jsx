@@ -15,11 +15,12 @@ function LoginPage() {
         Email: email,
         Password: password,
       });
-      if (response.status === 200) {
-        localStorage.setItem("isverified", true);
-        navigate("/home");
+      // console.log(response)
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token);
+        window.dispatchEvent(new Event("authChange"));
+        navigate("/dashboard");
       }
-      alert(response.data.message);
     } catch (err) {
       console.error(err);
     }

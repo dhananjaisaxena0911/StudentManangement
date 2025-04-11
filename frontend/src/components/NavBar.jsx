@@ -10,9 +10,18 @@ function NavBar() {
   const [showSIdebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
-    const value = localStorage.getItem('isverified');
-    setIsLoggedIn(value);
-    // console.log(value);
+    function checkLoginStatus(){
+      setIsLoggedIn(!!localStorage.getItem('token'))
+    };
+
+    checkLoginStatus();
+    window.addEventListener("storage", checkLoginStatus);      // sync across tabs
+    window.addEventListener("authChange", checkLoginStatus);   // sync within the same tab
+
+    return () => {
+      window.removeEventListener("storage", checkLoginStatus);
+      window.removeEventListener("authChange", checkLoginStatus);
+    };
   }, [])
 
   return (
@@ -28,19 +37,25 @@ function NavBar() {
         </a>)
         }
 
-        <Sidebar className={`${showSIdebar ? 'translate-x-0 opacity-100' : '-translate-x-28 opacity-0'} transition-all ease-in-out duration-200`} />
+        <Sidebar showSidebar={showSIdebar} setShowSidebar={setShowSidebar} />
         {/* Centered text */}
         <a href="/" className="font-bold text-white text-center flex-1">
           Student Management System
         </a>
 
         {/* Right icons */}
-        <a href="/signup" className="text-white hover:text-blue-500 px-3">
-          <SiGnuprivacyguard />
-        </a>
-        <a href="/login" className="text-white hover:text-blue-500">
-          <CiLogin />
-        </a>
+        {isLoggedIn ? (
+          <div className="text-white text-lg mr-5">Welcome</div>
+        ) : (
+          <>
+            <a href="/signup" className="text-white hover:text-blue-500 px-3">
+              <SiGnuprivacyguard />
+            </a>
+            <a href="/login" className="text-white hover:text-blue-500">
+              <CiLogin />
+            </a>
+          </>
+        )}
       </div>
     </div>
   );

@@ -1,25 +1,32 @@
 import userModelLogin from "../models/userLogin.js";
+import catchAsyncError from "../middleware/catchAsyncError.js";
+import ErrorHandler from "../utils/errorHandler.js";
 
-const Login = async (req, res) => {
+const Login = catchAsyncError(async (req, res, next) => {
   try {
     const { Email, Password } = req.body;
 
-    const user = await userModelLogin.findOne({ Email });
-    if (!user) {
-      return res.status(404).json({
-        message: "User Not Found",
-      });
+    if (!Email || !Password){
+      return next(new ErrorHandler("Please enter Email and Password", 400))
     }
-    const isMatch = Password === user.Password;
 
-    if (!isMatch) {
-      return res.status(400).json({
-        message: "Invalid Credential",
+    const user = await userModelLogin.findOne({ Email }).select("+Password");
+    if (!user) {
+      return next(new ErrorHandler("User not found", 404))
+    }
+    const isMatched = user.comparePassword(Password);
+
+    if (!isMatched) {
+      return res.status(401).json({
+        message: "Invalid Credentials",
       });
     }
+    const token = user.getJwtToken();
+
     res.status(200).json({
+      success: true,
       message: "Login Successful",
-      loggedin: true,
+      token
     });
   } catch (err) {
     res.status(500).json({
@@ -27,9 +34,9 @@ const Login = async (req, res) => {
       err,
     });
   }
-};
+});
 
-const Signup = async (req, res) => {
+const Signup = catchAsyncError(async (req, res) => {
   try {
     const { Name, Email, Password } = req.body;
 
@@ -51,16 +58,19 @@ const Signup = async (req, res) => {
       Email,
       Password,
     });
+
     await newUser.save();
-    res.status(200).json({
+    res.status(201).json({
+      success:true,
       message: "User registerd successfully",
+      newUser
     });
   } catch (err) {
     console.log(err);
     res.status(500).json({
-      message: "MESS IT IS",
+      message: "Internal Server Error",
     });
   }
-};
+});
 
 export { Login, Signup };
