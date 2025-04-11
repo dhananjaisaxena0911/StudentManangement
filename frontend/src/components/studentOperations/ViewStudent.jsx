@@ -14,7 +14,7 @@ export default function ViewStudent() {
     setLoading(true);
     setError("");
     try {
-      const response = await axios.get(${MONGO_URI});
+      const response = await axios.get(`${MONGO_URI}`);
       setStudentData(response.data); // assuming it's already an array
       console.log(response.data);
     } catch (err) {
