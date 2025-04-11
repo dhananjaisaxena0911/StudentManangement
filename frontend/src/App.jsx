@@ -9,6 +9,7 @@ import Aurora from "./components/Bits/Aurora";
 import DashBoardPage from "./pages/DashBordPage";
 import Footer from "./components/Footer";
 import Privateroute from "./components/Privateroute";
+import Chatbot from "./components/ChatBot";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/dashboard" element={<DashBoardPage />} />
         </Route>
       </Routes>
+      <Chatbot/>
       <Footer/>
     </div>
   );
