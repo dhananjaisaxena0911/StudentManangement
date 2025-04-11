@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import Aurora from "./components/Bits/Aurora";
 import DashBoardPage from "./pages/DashBordPage";
 import Footer from "./components/Footer";
+import Chatbot from "./components/ChatBot";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/forget" element={<ForgetPage />} />
         <Route path="/dashboard" element={<DashBoardPage />} />
       </Routes>
+      <Chatbot/>
       <Footer/>
     </div>
   );
