@@ -12,7 +12,7 @@ return (
 <div className='z-2'>
 
 <div className='flex h-[90vh] w-[100vw] justify-center align-middle '>
-    <div className='h-[100%] w-[80%]  flex flex-col justify-between'>
+    <div className='h-[100%] w-[80%]  flex flex-col justify-evenly'>
     <div className='font-bold text-white text-center text-2xl'>
         <h1>Welcome!</h1>
     </div>
