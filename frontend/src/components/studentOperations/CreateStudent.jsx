@@ -24,8 +24,8 @@ function CreateStudent() {
         Class: studentData.class,
         Course: studentData.course,
       });
-      alert(response.data.message); // Show success message
-      // Optionally, reset the form
+      alert(response.data.message);
+
       setStudentData({ name: "", age: "", class: "", course: "" });
     } catch (error) {
       console.error("Error creating student:", error);
