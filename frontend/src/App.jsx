@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import Aurora from "./components/Bits/Aurora";
 import DashBoardPage from "./pages/DashBordPage";
 import Footer from "./components/Footer";
+import Privateroute from "./components/Privateroute";
 
 function App() {
   return (
@@ -25,7 +26,9 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/forget" element={<ForgetPage />} />
-        <Route path="/dashboard" element={<DashBoardPage />} />
+        <Route element={<Privateroute />}>
+          <Route path="/dashboard" element={<DashBoardPage />} />
+        </Route>
       </Routes>
       <Footer/>
     </div>
