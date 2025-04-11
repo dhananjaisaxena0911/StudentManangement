@@ -10,9 +10,18 @@ function NavBar() {
   const [showSIdebar, setShowSidebar] = useState(false);
 
   useEffect(() => {
-    const value = localStorage.getItem('isverified');
-    setIsLoggedIn(value);
-    // console.log(value);
+    function checkLoginStatus(){
+      setIsLoggedIn(!!localStorage.getItem('token'))
+    };
+
+    checkLoginStatus();
+    window.addEventListener("storage", checkLoginStatus);      // sync across tabs
+    window.addEventListener("authChange", checkLoginStatus);   // sync within the same tab
+
+    return () => {
+      window.removeEventListener("storage", checkLoginStatus);
+      window.removeEventListener("authChange", checkLoginStatus);
+    };
   }, [])
 
   return (
@@ -28,7 +37,7 @@ function NavBar() {
         </a>)
         }
 
-        <Sidebar className={`${showSIdebar ? 'translate-x-0 opacity-100' : '-translate-x-28 opacity-0'} transition-all ease-in-out duration-200`} />
+        <Sidebar showSidebar={showSIdebar} setShowSidebar={setShowSidebar} />
         {/* Centered text */}
         <a href="/" className="font-bold text-white text-center flex-1">
           Student Management System
