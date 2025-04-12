@@ -19,13 +19,22 @@ export default function UpdateStudent() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!studentData.rollNo) {
+      alert("Roll No is required.");
+      return;
+    }
+
+    const updatedFields = {};
+
+    if (studentData.name.trim() !== "") updatedFields.Name = studentData.name;
+    if (studentData.class !== "") updatedFields.Class = studentData.class;
+    if (studentData.age.trim() !== "") updatedFields.Age = studentData.age;
+
+    if (studentData.course.trim() !== "") updatedFields.Course = studentData.course;
+
+    updatedFields.rollNo = studentData.rollNo;
     try {
-      const response = await axios.put(`${MONGO_URI}/rollno/${studentData.rollNo}`, {
-        Name: studentData.name,
-        Age: studentData.age,
-        Class: studentData.class,
-        Course: studentData.course,
-      });
+      const response = await axios.put(`${MONGO_URI}/rollno/${studentData.rollNo}`, updatedFields);
       alert(response.data.message);
       // Reset the form fields after successful submission
       setStudentData({ rollNo: '', name: '', age: '', class: '', course: '' });
@@ -65,14 +74,14 @@ export default function UpdateStudent() {
                 type="text"
                 id="name"
                 name="name"
-                required
+            
                 value={studentData.name}
                 onChange={handleChange}
                 className="mt-1 p-2 w-full border border-gray-300 rounded-lg"
                 placeholder="Enter your name"
               />
             </div>
-  
+
             <div>
               <label htmlFor="age" className="block text-sm font-medium text-black">
                 Age
@@ -81,14 +90,14 @@ export default function UpdateStudent() {
                 type="number"
                 id="age"
                 name="age"
-                required
+                
                 value={studentData.age}
                 onChange={handleChange}
                 className="mt-1 p-2 w-full border border-gray-300 rounded-lg"
                 placeholder="Enter your age"
               />
             </div>
-  
+
             <div>
               <label htmlFor="class" className="block text-sm font-medium text-black">
                 Class
@@ -97,14 +106,14 @@ export default function UpdateStudent() {
                 type="number"
                 id="class"
                 name="class"
-                required
+                
                 value={studentData.class}
                 onChange={handleChange}
                 className="mt-1 p-2 w-full border border-gray-300 rounded-lg"
                 placeholder="Enter your class"
               />
             </div>
-  
+
             <div>
               <label htmlFor="course" className="block text-sm font-medium text-black">
                 Course
@@ -113,14 +122,14 @@ export default function UpdateStudent() {
                 type="text"
                 id="course"
                 name="course"
-                required
+                
                 value={studentData.course}
                 onChange={handleChange}
                 className="mt-1 p-2 w-full border border-gray-300 rounded-lg"
                 placeholder="Enter your course"
               />
             </div>
-  
+
             <div>
               <button
                 type="submit"
