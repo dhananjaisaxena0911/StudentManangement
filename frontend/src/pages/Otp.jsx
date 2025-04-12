@@ -14,7 +14,7 @@ return Math.floor(100000 + Math.random() * 900000).toString(); // 6-digit
 
 const sendOTP = async () => {
 const otp = generateOTP();
-const expiry = Date.now() + 15 *60* 1000; // 15sec
+const expiry = Date.now() + 5 *60* 1000; // 5min
 
 // Save in localStorage
 localStorage.setItem("otp", otp);
@@ -124,7 +124,7 @@ alert("Incorrect OTP.");
             <div>
               <label
                 for="password"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                class="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 New Password
               </label>
@@ -133,14 +133,14 @@ alert("Incorrect OTP.");
                 name="password"
                 id="password"
                 placeholder="••••••••"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 mt-2 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required=""
               />
             </div>
             <div>
               <label
                 for="confirm-password"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                class="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Confirm password
               </label>
@@ -149,13 +149,13 @@ alert("Incorrect OTP.");
                 name="confirm-password"
                 id="confirm-password"
                 placeholder="••••••••"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm mt-2 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required=""
               />
             </div>
             <button
               type="submit"
-              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg mb-6 transition duration-200"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg mt-6 mb-6 transition duration-200"
             >
               Reset passwod
             </button>
