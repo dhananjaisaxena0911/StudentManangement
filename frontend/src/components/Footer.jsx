@@ -6,7 +6,7 @@ import { FaTwitter } from "react-icons/fa";
 
 function Footer() {
   return (
-    <div className=" flex w-[100vw] h-[25vh] justify-center items-center gap-11 bg-black absolute bottom-0">
+    <div className=" flex w-[100vw] h-[25vh] justify-center items-center gap-11 bg-black">
       <div className="w-[23%] h-[100%]">
         <img src={footerLogo} className=" h-[100%] w-[75%] bg-none " alt="" />
       </div>
