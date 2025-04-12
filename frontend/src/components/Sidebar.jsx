@@ -16,12 +16,12 @@ function Sidebar({showSidebar, setShowSidebar}) {
          window.dispatchEvent(new Event("authChange"));
          navigate("/login");
     }
-
-    function handleClick(){
+    function handleClick(optionName) {
+        console.log(`${optionName} clicked`);
         setShowSidebar(false);
-        console.log(optionClicked)
     }
-
+    
+   
   return (
     <div className={`absolute h-[calc(100vh-8rem)] bg-gray-800 text-white text-lg top-16 left-0 p-3 m-5 mt-0 w-64 rounded-lg px-6 ${showSidebar ? 'translate-x-0 opacity-100' : '-translate-x-28 opacity-0'} transition-all ease-in-out duration-200}`}>
         <ul className='flex flex-col gap-4 mt-12'>
