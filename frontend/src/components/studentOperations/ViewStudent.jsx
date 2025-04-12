@@ -33,23 +33,12 @@ export default function ViewStudent() {
     : studentData;
 
   return (
-    <div>
-      <div className='flex justify-center align-middle h-[90vh] items-center '>
-        <div className="flex flex-col items-center mt-8 border border-black rounded-2xl p-9">
+    <div className="w-screen h-screen">
+      <div className='flex justify-center align-middle h-[100vh]  items-center '>
+        <div className="flex flex-col items-center mt-8 border border-black rounded-2xl p-9 w-[90vw] max-w-screen-xl h-[80vh0 overflow-auto">
           <h2 className="text-2xl font-bold mb-4">VIEW STUDENT</h2>
           <form className="space-y-4 w-96">
-            <div>
-              <label htmlFor="ROLL NO." className="block text-sm font-medium text-black">
-                Roll number<sup className="text-red-500 text-l">*</sup>
-              </label>
-              <input
-                type="number"
-                id="ROLL NO." 
-                name="Roll number" required
-                className="mt-1 p-2 w-full border border-gray-300 rounded-lg"
-                placeholder="Enter your roll number"
-              />
-            </div>
+            
 
             <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-6">
               <input
@@ -72,8 +61,8 @@ export default function ViewStudent() {
             {error && <p className="text-center text-red-500">{error}</p>}
 
             {filteredStudents.length > 0 ? (
-              <div className="overflow-x-auto">
-                <table className="min-w-full bg-white border border-gray-300">
+              <div className="w-[50vw] max-h-[50vh] overflow-auto border border-gray-300 rounded-lg mx-[-28vh]">
+              <table className="min-w-full bg-white border-collapse">
                   <thead>
                     <tr className="bg-gray-100">
                       <th className="py-2 px-4 border">Roll No</th>
