@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 function LoginPage() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [error, setError] = React.useState("");
 
   const MONGO_URI = import.meta.env.VITE_MONGO_URI;
 
@@ -12,6 +13,7 @@ function LoginPage() {
   const handleLogin = async (e) => {
     try {
       e.preventDefault();
+      setError("");
       const response = await axios.post(`${MONGO_URI}/login`, {
         Email: email,
         Password: password,
@@ -23,7 +25,11 @@ function LoginPage() {
       }
       alert(response.data.message);
     } catch (err) {
-      console.error(err);
+      if (err.response && err.response.data.message) {
+        setError(err.response.data.message);
+      } else {
+        setError("An error occurred. Please try again.");
+      }
     }
   };
   return (
@@ -44,6 +50,11 @@ function LoginPage() {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign in your account
             </h1>
+            {error && (
+              <div className="text-white font-bold text-2xl text-center rounded-md mb-4 bg-red-600">
+                {error}
+              </div> // Display error message
+            )}
             <form className="space-y-4 md:space-y-6" onSubmit={handleLogin}>
               <div>
                 <label
@@ -123,3 +134,4 @@ function LoginPage() {
 }
 
 export default LoginPage;
+
