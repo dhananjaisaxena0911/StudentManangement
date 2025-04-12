@@ -37,8 +37,8 @@ export default function UpdateStudent() {
 
   return (
     <div>
-      <div className='flex justify-center align-middle h-[90vh] items-center'>
-        <div className="flex flex-col items-center mt-8 ">
+      <div className='flex justify-center align-middle h-[90vh] items-center '>
+        <div className="flex flex-col items-center mt-8 border border-black rounded-2xl p-9">
           <h2 className="text-2xl font-bold mb-4">UPDATE STUDENT</h2>
           <form className="space-y-6 w-96" onSubmit={handleSubmit}>
             <div>
