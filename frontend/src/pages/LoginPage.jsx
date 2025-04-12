@@ -101,7 +101,7 @@ function LoginPage() {
                   </div>
                 </div>
                 <a
-                  href="/forget"
+                  href="/otp"
                   className="text-sm font-medium text-primary-600 hover:underline dark:text-white"
                 >
                   Forgot password?
