@@ -15,7 +15,7 @@ export const Sendotp = async (req, res) => {
   const { email, otp } = req.body;
   try {
     await transporter.sendMail({
-      from: "OTP Service <sahilarora.sa03@gmail.com>",
+      from: `OTP Service <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "Your OTP Code",
       text: `Your OTP is: ${otp}`,
