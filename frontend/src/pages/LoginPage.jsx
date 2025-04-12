@@ -9,14 +9,15 @@ function LoginPage() {
   const MONGO_URI = import.meta.env.VITE_MONGO_URI;
 
   const navigate = useNavigate();
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
     try {
+      e.preventDefault();
       const response = await axios.post(`${MONGO_URI}/login`, {
         Email: email,
         Password: password,
       });
       if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem("token", response.data.token);
         window.dispatchEvent(new Event("authChange"));
         navigate("/dashboard");
       }
@@ -43,7 +44,7 @@ function LoginPage() {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign in your account
             </h1>
-            <form className="space-y-4 md:space-y-6">
+            <form className="space-y-4 md:space-y-6" onSubmit={handleLogin}>
               <div>
                 <label
                   for="email"
@@ -110,7 +111,6 @@ function LoginPage() {
               <button
                 type="submit"
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg mb-6 transition duration-200"
-                onClick={handleLogin}
               >
                 Sign in
               </button>
