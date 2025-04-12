@@ -16,14 +16,13 @@ function Sidebar({showSidebar, setShowSidebar}) {
          window.dispatchEvent(new Event("authChange"));
          navigate("/login");
     }
-    function handleClick(optionName) {
-        console.log(`${optionName} clicked`);
+    function handleClick() {
         setShowSidebar(false);
     }
     
    
   return (
-    <div className={`absolute h-[calc(100vh-8rem)] bg-gray-800 text-white text-lg top-16 left-0 p-3 m-5 mt-0 w-64 rounded-lg px-6 ${showSidebar ? 'translate-x-0 opacity-100' : '-translate-x-28 opacity-0'} transition-all ease-in-out duration-200}`}>
+    <div onMouseLeave={handleClick} className={`absolute h-[calc(100vh-8rem)] bg-gray-800 text-white text-lg top-16 left-0 p-3 m-5 mt-0 w-64 rounded-lg px-6 ${showSidebar ? 'translate-x-0 opacity-100' : '-translate-x-28 opacity-0'} transition-all ease-in-out duration-200}`}>
         <ul className='flex flex-col gap-4 mt-12'>
             <NavLink to='/'  onClick = {handleClick} className={({isActive}) => `${isActive ? 'bg-white text-xl text-gray-800' : 'hover:bg-gray-500 hover:text-xl'} flex justify-start font-bold items-center  transition-all duration-200 px-6 py-3 rounded-lg gap-4 cursor-pointer` }>
                 <div className='text-4xl'><FaHome /></div>
